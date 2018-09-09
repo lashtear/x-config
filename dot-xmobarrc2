@@ -1,0 +1,37 @@
+-- -*- Haskell -*-
+
+Config { font = "xft:IBM 3270:pixelsize=20"
+       , additionalFonts = [ "xft:Roboto Slab:pixelsize=14"
+                           , "xft:Font Awesome:pixelsize=20"
+                           , "xft:DejaVu Sans Mono:pixelsize=24:style=Bold"]
+       , border = TopB
+       , borderColor = "black"
+       , borderWidth = 1
+       , textOffset = -1
+       , iconOffset = -1
+       , bgColor = "#242424"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Bottom
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = False
+       , commands =
+         [
+           Run Cpu ["-t","<user>us <system>sy <iowait>io <idle>id","-p3","-S","True","-L","3","-H","50","--normal","green","--high","red"] 11
+         , Run Memory ["-t","<usedratio>ram","-p2","-S","True"] 13
+         , Run Swap ["-t","<usedratio>swap","-p2","-S","True"] 17
+         , Run ThermalZone 2 ["-L","50","-H","65","--normal","green","--high","red","-d","1"] 15
+         , Run Network "eth1" ["-d1", "-m10", "-t","<dev> <rx>↓ <tx>↑","-S", "True"] 7
+         , Run Com "/home/lucca/.local/bin/coindesk-bpi" [] "btc" 18000
+         , Run StdinReader
+         , Run PipeReader "xlog:/home/lucca/xlog" "xlog"
+         ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fn=1>%xlog%</fn> }{<fc=#000000>│</fc> 1<fn=2></fn> is $%btc% <fc=#000000>│</fc> %eth1% <fc=#000000>│</fc> %thermal2% %cpu% %memory% %swap%"
+       }

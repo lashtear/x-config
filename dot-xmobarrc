@@ -1,0 +1,33 @@
+-- -*- Haskell -*-
+
+Config { font = "xft:IBM 3270:pixelsize=20"
+       , additionalFonts = [ "xft:Roboto Slab:pixelsize=14"
+                           , "xft:Font Awesome:pixelsize=20"
+                           , "xft:DejaVu Sans Mono:pixelsize=24:style=Bold"]
+       , border = BottomB
+       , borderColor = "black"
+       , borderWidth = 1
+       , textOffset = -1
+       , iconOffset = -1
+       , bgColor = "#242424"
+       , fgColor = "grey"
+       , alpha = 255
+       , position = Top
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = False
+       , commands =
+         [
+           Run TopMem ["-S","True","-d","1"] 29
+         , Run TopProc ["-S","True","-d","1","-t","<both1>%"] 11
+         , Run Date "%a %Y-%m-%d %T %Z" "date" 1
+         , Run StdinReader
+         ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{<fc=#000000>│</fc> %top% %topmem% <fc=#000000>│</fc> <fc=#2e8b57>%date%</fc>"
+       }
