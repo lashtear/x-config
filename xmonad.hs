@@ -3,7 +3,7 @@
 
 module Main where
 
---import           KbLocks
+import           KbLocks                      (resetMods)
 
 import qualified Data.List                    as L
 import           Data.Map                     (Map)
@@ -69,9 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
        spawn "exec xfce4-screenshooter -f -s ~/Downloads")
     , ((modm,               xK_F1    ),
        spawn "exec xmodmap ~/.Xmodmap")
-    , ((modm,               xK_F2    ),
-       spawn "exec xdotool key Caps_Lock")
-
+    , ((modm,               xK_F2    ), io $ resetMods)
     ]
     ++
     [((m .|. modm, k), windows $ f i)

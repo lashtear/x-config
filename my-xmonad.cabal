@@ -1,0 +1,26 @@
+name:                my-xmonad
+version:             0.1.0.0
+synopsis:            Stub for cabal-assisted builds of xmonad config
+description:         Stub for cabal-assisted builds of xmonad config
+homepage:            https://github.com/lashtear/x-config/
+license:             BSD3
+license-file:        LICENSE.md
+author:              Emily Backes
+maintainer:          lucca@accela.net
+copyright:           Copyright © 2016-2018
+category:            Graphics
+build-type:          Simple
+cabal-version:       >=1.10
+
+-- The quirky paths are to build the existing xmonad conf layout
+executable xmonad-new
+  hs-source-dirs:    . lib
+  main-is:           xmonad.hs
+  ghc-options:       -threaded -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , xmonad >= 0.12
+                     , xmonad-contrib >= 0.12
+                     , containers
+                     , X11 >= 1.8
+  default-language:    Haskell2010
+
